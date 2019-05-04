@@ -1,0 +1,21 @@
+{
+  "name": "todo_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "create-react-app": "^3.0.0",
+    "material-design-icons": "^3.0.1",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-virtualized": "^9.21.0"
+  }
+}
