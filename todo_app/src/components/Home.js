@@ -38,45 +38,48 @@ class Home extends React.Component {
     state = {
         name: 'something to do',
       };
-    // let todoList = []
-    // for(let i=0; i<localStorage.length; i++){
-    //   let id = localStorage.key(i)
-    //   let todo =JSON.parse(localStorage.getItem(id)).title
-    //   let status = JSON.parse(localStorage.getItem(id)).status
-    //   todoList.push(
-    //     {id: id, title: todo, status:status }
-    //   )
-    // }
     
     handleChange = name => event => {
     this.setState({ [name]: event.target.value });
     };
 
     delete = id=> event => {
-      console.log('aaaaaaaaaaaaaaaaa');
       localStorage.removeItem(id);
       this.forceUpdate();
       
     }
 
     save = name => event => {
+      console.log('aaaaaaa');
       let max = 1;
-      for(let i=0; i<=localStorage.length; i++){
-        let id = parseInt(localStorage.key(i));
-        if (id > max){
-          max = id;
-        }
-      }
-      max += 1;
-      localStorage.setItem(
-        max,
-        JSON.stringify(
-          {
-            title: this.state.name,
-            status: 0
-          }
+      if (localStorage.length===0){
+        localStorage.setItem(
+          1,
+          JSON.stringify(
+            {
+              title: this.state.name,
+              status: 0
+            }
+          )
         )
-      )
+      } else{
+        for(let i=0; i<=localStorage.length; i++){
+          let id = parseInt(localStorage.key(i));
+          if (id >= max){
+            max = id;
+          }
+        }
+        max += 1;
+        localStorage.setItem(
+          max,
+          JSON.stringify(
+            {
+              title: this.state.name,
+              status: 0
+            }
+          )
+        )
+      }
       this.forceUpdate()
     }
 

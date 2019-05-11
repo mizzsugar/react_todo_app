@@ -19,9 +19,9 @@ class Todo extends React.Component {
   };
 
   renderTodoState = status => {
-    if (status==0) {
+    if (status===0) {
       return <span>未着手</span>
-    } else if(status==1) {
+    } else if(status===1) {
       return <span>進行中</span>
     } else {
       return <span>完了</span>
