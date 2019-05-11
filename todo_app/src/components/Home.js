@@ -51,6 +51,13 @@ class Home extends React.Component {
     this.setState({ [name]: event.target.value });
     };
 
+    delete = id=> event => {
+      console.log('aaaaaaaaaaaaaaaaa');
+      localStorage.removeItem(id);
+      this.forceUpdate();
+      
+    }
+
     save = name => event => {
       let max = 1;
       for(let i=0; i<=localStorage.length; i++){
@@ -100,7 +107,7 @@ class Home extends React.Component {
                     <AddIcon onClick={this.save(this.state.name)}/>
                 </Fab>
             </form>
-            <TodoTable rows={todoList}/>
+            <TodoTable rows={todoList} delete={this.delete}/>
         </div>
       );
     }

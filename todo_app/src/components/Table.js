@@ -125,17 +125,9 @@ const styles = theme => ({
 
 
 class TodoTable extends React.Component {
-  // constructor(props){
-  //   super(props)
-  // }
   state = {
     page: 0,
     rowsPerPage: 5,
-  };
-
-
-  linkToEdit = (event, id) => {
-    console.log(event);
   };
 
   renderTodoState = state => {
@@ -148,10 +140,11 @@ class TodoTable extends React.Component {
     }
   }
 
-  delete = (event, id) => {
-    localStorage.removeItem(event);
+  // delete = (event, id) => {
+  //   localStorage.removeItem(event);
+  //   this.forceUpdate();
     
-  }
+  // }
 
   handleChangePage = (event, page) => {
     this.setState({ page });
@@ -190,14 +183,14 @@ class TodoTable extends React.Component {
                   <TableCell align="left">{this.renderTodoState(row.status)}</TableCell>
                   <TableCell align="left">
                   <Fab color="secondary" aria-label="Edit" classsName={classes.fab}>
-                    <Link to={'/todo/'+ row.id} onClick={this.linkToEdit.bind(this, row.id)}>
+                    <Link to={'/todo/'+ row.id}>
                     <Edit className={classes.icon}/>
                     </Link>
                   </Fab>
                   </TableCell>
                   <TableCell align="left">
                   <Fab aria-label="Delete" className={classes.fab}>
-                    <DeleteIcon onClick={this.delete.bind(this, row.id)} />
+                    <DeleteIcon onClick={this.props.delete(row.id)} />
                   </Fab>
                   </TableCell>
                 </TableRow>
