@@ -9,6 +9,7 @@ import TodoTable from './Table'
 
 const styles = theme => ({
     container: {
+      margin: 20,
       display: 'flex',
       flexWrap: 'wrap',
     },
@@ -24,7 +25,7 @@ const styles = theme => ({
       width: 200,
     },
     fab: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing.unit * 2,
     },
     extendedIcon: {
         marginRight: theme.spacing.unit,
@@ -93,7 +94,6 @@ class Home extends React.Component {
 
       return(
         <div id='todo'>
-            <p>home page</p>
             <form className={classes.container} noValidate autoComplete="off">
                 <TextField
                 id="standard-name"
