@@ -125,9 +125,14 @@ const styles = theme => ({
 
 
 class TodoTable extends React.Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
+  state = {
+    page: 0,
+    rowsPerPage: 5,
+  };
+
 
   linkToEdit = (event, id) => {
     console.log(event);
@@ -145,15 +150,7 @@ class TodoTable extends React.Component {
 
   delete = (event, id) => {
     localStorage.removeItem(event);
-    let todoList = []
-    for(let i=0; i<localStorage.length; i++){
-      let id = localStorage.key(i)
-      let todo = localStorage.getItem(id)
-      todoList.push(
-        {id: id, title: todo, status:0 }
-      )
-    }
-    this.setState({rows: todoList});
+    
   }
 
   handleChangePage = (event, page) => {
@@ -166,7 +163,8 @@ class TodoTable extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { rows, rowsPerPage, page } = this.props;
+    const { rowsPerPage, page } = this.state;
+    const rows = this.props.rows;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (

@@ -13,7 +13,6 @@ const styles = theme => ({
       flexWrap: 'wrap',
     },
     textField: {
-      marginTop: 50,
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
       width: 200,
@@ -25,7 +24,6 @@ const styles = theme => ({
       width: 200,
     },
     fab: {
-        marginTop: 50,
         margin: theme.spacing.unit,
     },
     extendedIcon: {
@@ -33,33 +31,27 @@ const styles = theme => ({
     },
   });
 
-let todoList = []
-for(let i=0; i<localStorage.length; i++){
-  let id = localStorage.key(i)
-  let todo =JSON.parse(localStorage.getItem(id)).title
-  let status = JSON.parse(localStorage.getItem(id)).status
-  todoList.push(
-    {id: id, title: todo, status:status }
-  )
-}
+  
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: 'something to do',
-      rows: todoList,
-      page: 0,
-      rowsPerPage: 5
+    state = {
+        name: 'something to do',
+      };
+    // let todoList = []
+    // for(let i=0; i<localStorage.length; i++){
+    //   let id = localStorage.key(i)
+    //   let todo =JSON.parse(localStorage.getItem(id)).title
+    //   let status = JSON.parse(localStorage.getItem(id)).status
+    //   todoList.push(
+    //     {id: id, title: todo, status:status }
+    //   )
+    // }
+    
+    handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
     };
-  }
 
-  handleChange = name => event => {
-  this.setState({ [name]: event.target.value });
-  };
-
-  addTodo = event => {
+    save = name => event => {
       let max = 1;
       for(let i=0; i<=localStorage.length; i++){
         let id = parseInt(localStorage.key(i));
@@ -78,51 +70,37 @@ class Home extends React.Component {
         )
       )
       this.forceUpdate()
-  }
+    }
 
-  delete = (event, id) => {
-    localStorage.removeItem(event);
-    // let todoList = []
-    // for(let i=0; i<localStorage.length; i++){
-    //   let id = localStorage.key(i)
-    //   let todo = localStorage.getItem(id)
-    //   todoList.push(
-    //     {id: id, title: todo, status:0 }
-    //   )
-    // }
-    //this.setState({rows: todoList});
-  }
+    render(){
+      const { classes } = this.props;
+      let todoList = []
+      for(let i=0; i<localStorage.length; i++){
+        let id = localStorage.key(i)
+        let todo =JSON.parse(localStorage.getItem(id)).title
+        let status = JSON.parse(localStorage.getItem(id)).status
+        todoList.push(
+          {id: id, title: todo, status:status }
+        )
+      }
 
-  render(){
-    const { classes } = this.props;
-
-    return(
-      <div id='todo'>
-          <form className={classes.container} noValidate autoComplete="off">
-              <TextField
-              id="standard-name"
-              label="Title"
-              className={classes.textField}
-              value={this.state.name}
-              onChange={this.handleChange('name')}
-              margin="normal"
-              />
-              <Fab
-              color="primary"
-              size="medium"
-              aria-label="Add"
-              className={classes.fab}
-              onClick={this.addTodo}
-              >
-                  <AddIcon />
-              </Fab>
-          </form>
-          <TodoTable
-          rows={this.state.rows}
-          delete={this.delete('id')}
-          page={this.state.page}
-          rowsPerPage={this.state.rowsPerPage}
-          />
+      return(
+        <div id='todo'>
+            <p>home page</p>
+            <form className={classes.container} noValidate autoComplete="off">
+                <TextField
+                id="standard-name"
+                label="Title"
+                className={classes.textField}
+                value={this.state.name}
+                onChange={this.handleChange('name')}
+                margin="normal"
+                />
+                <Fab color="primary" size="medium" aria-label="Add" className={classes.fab}>
+                    <AddIcon onClick={this.save(this.state.name)}/>
+                </Fab>
+            </form>
+            <TodoTable rows={todoList}/>
         </div>
       );
     }
