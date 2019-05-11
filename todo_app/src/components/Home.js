@@ -50,7 +50,6 @@ class Home extends React.Component {
     }
 
     save = name => event => {
-      console.log('aaaaaaa');
       let max = 1;
       if (localStorage.length===0){
         localStorage.setItem(

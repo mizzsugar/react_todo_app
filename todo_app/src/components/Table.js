@@ -140,12 +140,6 @@ class TodoTable extends React.Component {
     }
   }
 
-  // delete = (event, id) => {
-  //   localStorage.removeItem(event);
-  //   this.forceUpdate();
-    
-  // }
-
   handleChangePage = (event, page) => {
     this.setState({ page });
   };
